@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security as a Efficient Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================
+   Tokens
+   ============================ */
+:root {
+  --bg:          #F5F1E8;
+  --bg-warm:     #ECE3D0;
+  --bg-deep:     #E0D4BC;
+  --bg-card:     #EFE7D6;
+  --sage:        #8A9A7B;
+  --sage-deep:   #5C6B4D;
+  --sage-pale:   #B5C0A6;
+  --terracotta:  #B5654A;
+  --terracotta-deep: #9A5340;
+  --dusk:        #C9888C;
+  --ink:         #2A2620;
+  --ink-soft:    #5C544A;
+  --ink-mute:    #8B8275;
+  --line:        #D8CCB8;
+  --line-soft:   #E5DCC6;
+  --ease-quiet:  cubic-bezier(.22, 1, .36, 1);
+  --ease-soft:   cubic-bezier(.16, 1, .3, 1);
+  --ease-precise:cubic-bezier(.4, 0, .2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Linen weave texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.55;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(120, 100, 60, 0.028) 0px, rgba(120, 100, 60, 0.028) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(120, 100, 60, 0.022) 0px, rgba(120, 100, 60, 0.022) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: multiply;
+}
+
+/* Paper grain */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 101;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' seed='4'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+
+/* ============================
+   Typography
+   ============================ */
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+
+.serif { font-family: 'Fraunces', Georgia, serif; }
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-weight: 500;
+  color: var(--sage-deep);
+}
+
+.muted { color: var(--ink-mute); }
+.soft  { color: var(--ink-soft); }
+
+/* ============================
+   Nav
+   ============================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 1.4rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 50;
+  background: linear-gradient(to bottom, rgba(245, 241, 232, 0.92) 0%, rgba(245, 241, 232, 0) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: padding 400ms var(--ease-quiet), background 400ms var(--ease-quiet), border-color 400ms var(--ease-quiet);
+  border-bottom: 1px solid transparent;
+}
+
+.nav.scrolled {
+  padding: 1rem 2.5rem;
+  background: rgba(245, 241, 232, 0.96);
+  border-bottom-color: var(--line-soft);
+}
+
+.nav__brand {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.nav__brand-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: block;
+  margin-top: 3px;
+  font-weight: 400;
+}
+
+.nav__links {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav__link {
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 300ms var(--ease-quiet);
+  position: relative;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%;
+  bottom: -4px;
+  height: 1px;
+  background: var(--terracotta);
+  transition: right 400ms var(--ease-quiet);
+}
+
+.nav__link:hover { color: var(--terracotta); }
+.nav__link:hover::after { right: 0; }
+
+.nav__chime {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.9rem 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 300ms var(--ease-quiet);
+  font-weight: 500;
+}
+
+.nav__chime:hover {
+  border-color: var(--sage);
+  color: var(--sage-deep);
+}
+
+.nav__chime.is-on {
+  background: var(--sage);
+  color: var(--bg);
+  border-color: var(--sage);
+}
+
+.nav__chime-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-mute);
+  transition: background 300ms;
+  flex-shrink: 0;
+}
+
+.nav__chime.is-on .nav__chime-dot {
+  background: var(--bg);
+  animation: chime-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes chime-dot-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* ============================
+   Hero
+   ============================ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 4rem;
+  padding: 11rem 3rem 6rem;
+  position: relative;
+  align-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.hero__left {
+  position: relative;
+  z-index: 2;
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero__eyebrow-line {
+  width: 2.5rem;
+  height: 1px;
+  background: var(--sage);
+}
+
+.hero__title {
+  font-size: clamp(2.8rem, 6.2vw, 5.4rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--sage-deep);
+}
+
+.hero__sub {
+  font-size: 1.04rem;
+  line-height: 1.78;
+  color: var(--ink-soft);
+  max-width: 36rem;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.05rem 1.8rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 400ms var(--ease-quiet);
+  font-weight: 500;
+}
+
+.hero__cta:hover {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+.hero__cta-arrow {
+  transition: transform 400ms var(--ease-quiet);
+  display: inline-block;
+}
+
+.hero__cta:hover .hero__cta-arrow {
+  transform: translateX(5px);
+}
+
+.hero__free {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+  font-weight: 400;
+}
+
+.hero__free strong {
+  color: var(--terracotta);
+  font-weight: 500;
+}
+
+/* Hero visual */
+.hero__right {
+  position: relative;
+  height: 76vh;
+  min-height: 540px;
+  max-height: 760px;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 30px 80px -30px rgba(60, 50, 30, 0.25);
+}
+
+.hero__visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: breath 8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes breath {
+  0%, 100% { transform: scale(1) translate(0, 0); filter: brightness(1) saturate(1); }
+  50%      { transform: scale(1.05) translate(-0.5%, -0.5%); filter: brightness(1.07) saturate(1.08); }
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(245, 241, 232, 0.08) 0%, rgba(60, 60, 40, 0.18) 100%),
+    linear-gradient(135deg, rgba(245, 241, 232, 0.22) 0%, transparent 45%, rgba(138, 154, 123, 0.18) 100%);
+  pointer-events: none;
+}
+
+.hero__sunbeam {
+  position: absolute;
+  top: -15%;
+  right: -25%;
+  width: 70%;
+  height: 130%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255, 232, 195, 0.5) 0%, rgba(255, 220, 170, 0.18) 30%, transparent 65%);
+  transform: rotate(18deg);
+  pointer-events: none;
+  animation: breath 8s ease-in-out infinite;
+  animation-delay: -2s;
+  mix-blend-mode: screen;
+}
+
+.hero__breath-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  background: rgba(245, 241, 232, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  border: 1px solid var(--line-soft);
+  z-index: 3;
+}
+
+.hero__breath-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--sage);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero__breath-circle::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sage);
+  animation: breath-pulse 8s ease-in-out infinite;
+}
+
+@keyframes breath-pulse {
+  0%, 100% { transform: scale(0.25); opacity: 0.35; }
+  50%      { transform: scale(1.25); opacity: 0.95; }
+}
+
+.hero__breath-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--ink-soft);
+  font-weight: 500;
+  min-width: 48px;
+  transition: opacity 300ms var(--ease-quiet);
+}
+
+.hero__breath-meta {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  z-index: 3;
+}
+
+.hero__breath-meta-time {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--bg);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.hero__breath-meta-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: rgba(245, 241, 232, 0.85);
+  font-weight: 500;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: var(--ink-mute);
+  z-index: 4;
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 36px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--sage);
+  animation: scroll-line 2.4s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(300%); }
+}
+
+/* ============================
+   Section primitives
+   ============================ */
+.section {
+  padding: 8rem 3rem;
+  position: relative;
+}
+
+.section__container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section__header {
+  max-width: 52rem;
+  margin: 0 auto 6rem;
+  text-align: center;
+}
+
+.section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.section__eyebrow-line {
+  width: 2rem;
+  height: 1px;
+  background: var(--sage);
+}
+
+.section__title {
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+.section__title em {
+  font-style: italic;
+  color: var(--sage-deep);
+}
+
+.section__lede {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.78;
+  max-width: 40rem;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* ============================
+   Practices
+   ============================ */
+.practices {
+  background: var(--bg-warm);
+  position: relative;
+}
+
+.practices::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line), transparent);
+}
+
+.practices__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.practice {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.practice__image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: 3px;
+  position: relative;
+  margin-bottom: 1.75rem;
+  background: var(--bg-deep);
+}
+
+.practice__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 6s var(--ease-quiet);
+  will-change: transform;
+}
+
+.practice__image:hover img {
+  transform: scale(1.06);
+}
+
+.practice__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(60, 50, 30, 0.15) 100%);
+  pointer-events: none;
+}
+
+.practice__num {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-family: 'Fraunces', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--bg);
+  z-index: 2;
+  font-weight: 400;
+}
+
+.practice__label {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+
+.practice__name {
+  font-size: 1.7rem;
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.practice__desc {
+  font-size: 0.97rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+
+.practice__meta {
+  list-style: none;
+  border-top: 1px solid var(--line);
+  padding-top: 1rem;
+}
+
+.practice__meta li {
+  font-size: 12px;
+  color: var(--ink-mute);
+  letter-spacing: 0.02em;
+  padding: 0.4rem 0;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.practice__meta li::before {
+  content: '·';
+  color: var(--sage);
+}
+
+/* ============================
+   Teacher
+   ============================ */
+.teacher {
+  padding: 9rem 3rem;
+}
+
+.teacher__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.teacher__left {
+  position: sticky;
+  top: 8rem;
+}
+
+.teacher__image {
+  width: 100%;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  border-radius: 3px;
+  position: relative;
+  background: var(--bg-deep);
+}
+
+.teacher__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 6s var(--ease-quiet);
+  will-change: transform;
+}
+
+.teacher__image:hover img {
+  transform: scale(1.05);
+}
+
+.teacher__caption {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.teacher__caption-line {
+  width: 1.5rem;
+  height: 1px;
+  background: var(--line);
+}
+
+.teacher__right {
+  padding-top: 1rem;
+}
+
+.teacher__heading {
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin-bottom: 3rem;
+  color: var(--ink);
+}
+
+.teacher__heading em {
+  font-style: italic;
+  color: var(--sage-deep);
+}
+
+.teacher__quote-wrap {
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  background: var(--bg-warm);
+  border-radius: 4px;
+  border-left: 2px solid var(--sage);
+  position: relative;
+  cursor: default;
+  transition: background 400ms var(--ease-quiet);
+}
+
+.teacher__quote-wrap:hover {
+  background: var(--bg-card);
+}
+
+.teacher__quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 300;
+  letter-spacing: -0.005em;
+  margin-bottom: 1.25rem;
+  min-height: 6rem;
+}
+
+.teacher__quote-text {
+  color: var(--ink);
+}
+
+.teacher__quote-cursor {
+  display: inline-block;
+  width: 2px;
+  margin-left: 2px;
+  color: var(--terracotta);
+  font-weight: 300;
+  animation: blink 1s steps(2) infinite;
+  transform: translateY(2px);
+}
+
+.teacher__quote-cursor.is-hidden {
+  opacity: 0;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+.teacher__hint {
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: opacity 400ms var(--ease-quiet);
+}
+
+.teacher__hint::before {
+  content: '';
+  width: 1rem;
+  height: 1px;
+  background: var(--ink-mute);
+}
+
+.teacher__hint.is-hidden {
+  opacity: 0;
+}
+
+.teacher__bio {
+  margin-bottom: 3rem;
+}
+
+.teacher__bio p {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+}
+
+.teacher__meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.teacher__meta-item .eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.teacher__meta-item p {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ============================
+   Schedule
+   ============================ */
+.schedule {
+  background: var(--bg-warm);
+  padding: 8rem 3rem;
+  position: relative;
+}
+
+.schedule::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line), transparent);
+}
+
+.schedule__container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.schedule__week {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.schedule__week-label {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.schedule__week-nav {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.schedule__week-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  transition: all 300ms var(--ease-quiet);
+}
+
+.schedule__week-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.schedule__week-current {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0.5rem;
+}
+
+.schedule__day {
+  margin-bottom: 2.5rem;
+}
+
+.schedule__day-label {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--sage-deep);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
+.schedule__row {
+  border-bottom: 1px solid var(--line-soft);
+  cursor: pointer;
+  transition: background 300ms var(--ease-quiet);
+}
+
+.schedule__row:hover {
+  background: rgba(255, 250, 235, 0.5);
+}
+
+.schedule__row.is-open {
+  background: var(--bg-card);
+}
+
+.schedule__row-main {
+  display: grid;
+  grid-template-columns: 130px 1fr 140px 24px;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.25rem 1rem;
+}
+
+.schedule__time {
+  font-family: 'Fraunces', serif;
+  font-size: 0.95rem;
+  color: var(--ink);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.schedule__practice {
+  font-size: 0.97rem;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.schedule__practice em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--terracotta);
+  font-size: 0.88rem;
+  margin-left: 0.5rem;
+}
+
+.schedule__seats {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-weight: 500;
+}
+
+.seat-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.seat-dot-high { background: var(--sage); }
+.seat-dot-mid  { background: var(--terracotta); }
+.seat-dot-low  { background: var(--dusk); }
+.seat-dot-full { background: var(--ink-mute); opacity: 0.5; }
+
+.schedule__chev {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  color: var(--ink-mute);
+  transition: transform 400ms var(--ease-quiet);
+  text-align: center;
+  font-weight: 300;
+}
+
+.schedule__row.is-open .schedule__chev {
+  transform: rotate(45deg);
+  color: var(--terracotta);
+}
+
+.schedule__row-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 500ms var(--ease-quiet);
+}
+
+.schedule__detail-inner {
+  padding: 0 1rem 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.schedule__detail-inner > div .eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.schedule__detail-inner > div p {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.schedule__row.is-open .schedule__row-detail {
+  /* max-height set by JS */
+}
+
+.schedule__full-row {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--ink-mute);
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/* ============================
+   First Class
+   ============================ */
+.first-class {
+  padding: 9rem 3rem;
+  position: relative;
+}
+
+.first-class__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 5rem;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.first-class__left {
+  position: sticky;
+  top: 8rem;
+}
+
+.first-class__title {
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+.first-class__title em {
+  font-style: italic;
+  color: var(--sage-deep);
+}
+
+.first-class__lede {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.78;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.first-class__notes {
+  list-style: none;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+
+.first-class__notes li {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  padding: 0.6rem 0;
+  line-height: 1.5;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.first-class__notes li::before {
+  content: '·';
+  color: var(--sage);
+  flex-shrink: 0;
+}
+
+/* Form */
+.first-class__form {
+  background: var(--bg-warm);
+  padding: 3rem;
+  border-radius: 4px;
+  border: 1px solid var(--line-soft);
+}
+
+.form__row {
+  margin-bottom: 1.5rem;
+}
+
+.form__label {
+  display: block;
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--sage-deep);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form__input,
+.form__select,
+.form__textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.97rem;
+  color: var(--ink);
+  transition: border-color 300ms var(--ease-quiet), background 300ms var(--ease-quiet);
+  font-weight: 400;
+}
+
+.form__input:focus,
+.form__select:focus,
+.form__textarea:focus {
+  outline: none;
+  border-color: var(--sage);
+  background: var(--bg);
+}
+
+.form__textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+}
+
+.form__textarea::placeholder {
+  color: var(--ink-mute);
+  font-style: italic;
+}
+
+.form__select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%235C544A' stroke-width='1.4' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.form__submit {
+  width: 100%;
+  padding: 1.1rem 1.5rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 400ms var(--ease-quiet);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+.form__submit:hover {
+  background: var(--terracotta);
+}
+
+.form__submit-arrow {
+  transition: transform 400ms var(--ease-quiet);
+}
+
+.form__submit:hover .form__submit-arrow {
+  transform: translateX(4px);
+}
+
+.form__note {
+  margin-top: 1.25rem;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.form__thanks {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.form__thanks-mark {
+  font-family: 'Fraunces', serif;
+  font-size: 2.5rem;
+  font-style: italic;
+  color: var(--sage-deep);
+  margin-bottom: 1rem;
+}
+
+.form__thanks-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 0.85rem;
+  color: var(--ink);
+}
+
+.form__thanks-body {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1.7;
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+/* ============================
+   Footer
+   ============================ */
+.footer {
+  background: var(--bg-warm);
+  padding: 5rem 3rem 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.3fr 2fr;
+  gap: 4rem;
+  max-width: 1400px;
+  margin: 0 auto 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer__brand-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.footer__brand-tag {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  font-weight: 300;
+  max-width: 22rem;
+}
+
+.footer__cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer__col .eyebrow {
+  margin-bottom: 0.5rem;
+}
+
+.footer__col a {
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 300ms var(--ease-quiet);
+  letter-spacing: 0.005em;
+}
+
+.footer__col a:hover {
+  color: var(--terracotta);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0.06em;
+}
+
+/* ============================
+   Toast
+   ============================ */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.85rem 1.5rem;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  z-index: 200;
+  transition: transform 500ms var(--ease-quiet);
+  max-width: 90vw;
+}
+
+.toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.toast__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--sage);
+  flex-shrink: 0;
+  animation: chime-dot-pulse 1.6s ease-in-out infinite;
+}
+
+/* ============================
+   Fade-up
+   ============================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 700ms var(--ease-quiet), transform 700ms var(--ease-quiet);
+  will-change: opacity, transform;
+}
+
+.fade-up.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ============================
+   Responsive
+   ============================ */
+@media (max-width: 980px) {
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav__links { gap: 1.25rem; }
+  .nav__link:not(.nav__chime) { display: none; }
+  
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 9rem 1.5rem 5rem;
+    gap: 3rem;
+  }
+  .hero__right { height: 60vh; min-height: 400px; }
+  
+  .section { padding: 5rem 1.5rem; }
+  .section__header { margin-bottom: 4rem; }
+  
+  .practices__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  
+  .teacher { padding: 5rem 1.5rem; }
+  .teacher__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .teacher__left { position: relative; top: 0; }
+  
+  .schedule { padding: 5rem 1.5rem; }
+  .schedule__row-main {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem 0.75rem;
+  }
+  .schedule__seats { font-size: 10px; }
+  .schedule__detail-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    padding: 0 0.75rem 1.5rem;
+  }
+  
+  .first-class { padding: 5rem 1.5rem; }
+  .first-class__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .first-class__left { position: relative; top: 0; }
+  .first-class__form { padding: 2rem 1.5rem; }
+  
+  .footer { padding: 4rem 1.5rem 2rem; }
+  .footer__top { grid-template-columns: 1fr; gap: 2.5rem; }
+  .footer__cols { grid-template-columns: 1fr 1fr; }
+  .footer__bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+@media (max-width: 600px) {
+  .nav__brand { font-size: 1.2rem; }
+  .nav__brand-meta { font-size: 8.5px; }
+  .nav__chime-label { display: none; }
+  .nav__chime { padding: 0.5rem; }
+  
+  .hero__title { font-size: 2.6rem; }
+  .hero__breath-meta { display: none; }
+  
+  .practice__name { font-size: 1.4rem; }
+  
+  .teacher__meta { grid-template-columns: 1fr; gap: 1.25rem; }
+  .teacher__quote-wrap { padding: 1.75rem; }
+  .teacher__quote { font-size: 1.1rem; }
+  
+  .schedule__detail-inner { grid-template-columns: 1fr; }
+  
+  .footer__cols { grid-template-columns: 1fr; }
+}
+
+/* ============================
+   Touch / reduced motion
+   ============================ */
+@media (hover: none) {
+  .practice__image:hover img,
+  .teacher__image:hover img { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 200ms !important;
+  }
+  .hero__image, .hero__sunbeam, .hero__breath-circle::before { animation: none !important; }
+  .fade-up { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================  NAV  ========================= -->
+<header class="nav" id="nav">
+  <a href="#" class="nav__brand" style="text-decoration:none;color:inherit;">
+    Riesal
+    <span class="nav__brand-meta">A Quiet Security Practice</span>
+  </a>
+  <nav class="nav__links">
+    <a href="#practices" class="nav__link">Practices</a>
+    <a href="#teacher" class="nav__link">Teacher</a>
+    <a href="#schedule" class="nav__link">Schedule</a>
+    <a href="#first-class" class="nav__link">First Class</a>
+    <button class="nav__chime" id="chime-toggle" aria-label="Toggle quiet chime">
+      <span class="nav__chime-dot"></span>
+      <span class="nav__chime-label">Quiet chime</span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+<!-- =========================  HERO  ========================= -->
+<section class="hero" id="hero">
+  <div class="hero__left">
+    <div class="hero__eyebrow fade-up">
+      <span class="hero__eyebrow-line"></span>
+      <span class="eyebrow">A personal studio · Jakarta &amp; remote · since 2014</span>
+    </div>
+    
+    <h1 class="hero__title fade-up" style="transition-delay:80ms">
+      Security,<br>
+      practiced <em>slowly</em>.
+    </h1>
+    
+    <p class="hero__sub fade-up" style="transition-delay:180ms">
+      I'm Riesal. I work in cybersecurity, but I no longer believe urgency makes us safer. This is a small studio for defensive monitoring, threat intelligence, incident response, and secure architecture — practiced with patience, the way you'd practice breath.
+    </p>
+    
+    <div class="hero__actions fade-up" style="transition-delay:280ms">
+      <a href="#first-class" class="hero__cta">
+        <span>Book a first conversation</span>
+        <span class="hero__cta-arrow">→</span>
+      </a>
+    </div>
+    
+    <p class="hero__free fade-up" style="transition-delay:360ms">
+      <strong>First session is free</strong> · 50 minutes · no preparation needed
+    </p>
+  </div>
+  
+  <div class="hero__right fade-up" style="transition-delay:240ms">
+    <div class="hero__visual">
+      <img class="hero__image" src="https://picsum.photos/seed/morning-linen-window-light/900/1180" alt="Soft morning light through linen curtains">
+      <div class="hero__sunbeam"></div>
+      <div class="hero__overlay"></div>
+    </div>
+    
+    <div class="hero__breath-meta">
+      <div class="hero__breath-meta-time" id="clock">06:42</div>
+      <div class="hero__breath-meta-label">Jakarta · WIB</div>
+    </div>
+    
+    <div class="hero__breath-indicator">
+      <div class="hero__breath-circle"></div>
+      <span class="hero__breath-label" id="breath-label">Inhale</span>
+    </div>
+  </div>
+  
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- =========================  PRACTICES  ========================= -->
+<section class="section practices" id="practices">
+  <div class="section__header">
+    <div class="section__eyebrow fade-up">
+      <span class="section__eyebrow-line"></span>
+      <span class="eyebrow">Four Practices</span>
+    </div>
+    <h2 class="section__title fade-up">A practice for each <em>posture</em> of attention.</h2>
+    <p class="section__lede fade-up">Every security problem is, somewhere underneath, a question of how we pay attention. These four practices are how I work — and how I teach. Each maps to a posture you already know from the mat.</p>
+  </div>
+  
+  <div class="practices__grid">
+    
+    <article class="practice fade-up">
+      <div class="practice__image kb-image">
+        <span class="practice__num">01</span>
+        <img src="https://picsum.photos/seed/vinyasa-flow-traffic-monitor/720/900" alt="Vinyasa — flowing movement">
+      </div>
+      <div class="practice__label">— Vinyasa —</div>
+      <h3 class="practice__name">Defensive Monitoring</h3>
+      <p class="practice__desc">Steady, flowing observation. Continuous movement through traffic, alert by alert, breath by breath. The body learns what "normal" feels like, and the strange becomes obvious — not because we hunted it, but because we were paying attention.</p>
+      <ul class="practice__meta">
+        <li>Pace · Steady, sustained</li>
+        <li>Tools · SIEM, EDR, network telemetry</li>
+        <li>For · Analysts, SOC leads</li>
+      </ul>
+    </article>
+    
+    <article class="practice fade-up" style="transition-delay:120ms">
+      <div class="practice__image kb-image">
+        <span class="practice__num">02</span>
+        <img src="https://picsum.photos/seed/yin-slow-deep-threat-study/720/900" alt="Yin — slow deep stretch">
+      </div>
+      <div class="practice__label">— Yin —</div>
+      <h3 class="practice__name">Threat Intelligence</h3>
+      <p class="practice__desc">Slow, deep study. Holding postures in adversary behavior long enough to feel what's actually happening underneath. We sit with the data until it tells us what it knows — not what we hoped it would say.</p>
+      <ul class="practice__meta">
+        <li>Pace · Slow, held</li>
+        <li>Tools · OSINT, TI platforms, attribution</li>
+        <li>For · Analysts, researchers</li>
+      </ul>
+    </article>
+    
+    <article class="practice fade-up" style="transition-delay:200ms">
+      <div class="practice__image kb-image">
+        <span class="practice__num">03</span>
+        <img src="https://picsum.photos/seed/restorative-incident-recovery-quiet/720/900" alt="Restorative — supported recovery">
+      </div>
+      <div class="practice__label">— Restorative —</div>
+      <h3 class="practice__name">Incident Response</h3>
+      <p class="practice__desc">Recovery practice. When something has gone wrong, we slow everything down. We rebuild from the breath outward. No heroic decisions made at 3am unless something is actively on fire — and even then, the first move is to breathe.</p>
+      <ul class="practice__meta">
+        <li>Pace · Slowed, deliberate</li>
+        <li>Tools · IR playbooks, forensics, comms</li>
+        <li>For · IR leads, leadership</li>
+      </ul>
+    </article>
+    
+    <article class="practice fade-up" style="transition-delay:280ms">
+      <div class="practice__image kb-image">
+        <span class="practice__num">04</span>
+        <img src="https://picsum.photos/seed/breathwork-foundational-architecture/720/900" alt="Breathwork — foundation">
+      </div>
+      <div class="practice__label">— Breathwork —</div>
+      <h3 class="practice__name">Secure Architecture</h3>
+      <p class="practice__desc">Foundational work. The unseen structure that everything else depends on. We design like we breathe — quietly, repeatedly, in patterns the body can sustain for years. Not the cleverest pattern. The one you can keep.</p>
+      <ul class="practice__meta">
+        <li>Pace · Foundational, ongoing</li>
+        <li>Tools · Threat modeling, zero trust, review</li>
+        <li>For · Architects, engineering leads</li>
+      </ul>
+    </article>
+    
+  </div>
+</section>
+
+<!-- =========================  TEACHER  ========================= -->
+<section class="teacher" id="teacher">
+  <div class="teacher__grid">
+    
+    <div class="teacher__left">
+      <div class="teacher__image kb-image fade-up">
+        <img src="https://picsum.photos/seed/riesal-quiet-morning-portrait/720/900" alt="Portrait of Riesal">
+      </div>
+      <div class="teacher__caption fade-up">
+        <span class="teacher__caption-line"></span>
+        <span class="eyebrow">Riesal · Jakarta · Since 2014</span>
+      </div>
+    </div>
+    
+    <div class="teacher__right">
+      <div class="section__eyebrow fade-up">
+        <span class="section__eyebrow-line"></span>
+        <span class="eyebrow">Why I Teach</span>
+      </div>
+      
+      <h2 class="teacher__heading fade-up">I came to security the long way — through burnout, through rushing, through the belief that <em>faster meant safer</em>.</h2>
+      
+      <div class="teacher__quote-wrap fade-up" id="quote-wrap">
+        <blockquote class="teacher__quote" id="teacher-quote" data-text="What I practice now is slower. I teach because attention is the actual skill, and attention cannot be hurried. The tools change every eighteen months. The capacity to sit with a problem — to not flinch, not panic, not perform — that stays.">
+          <span class="teacher__quote-text" id="quote-text"></span><span class="teacher__quote-cursor" id="quote-cursor">|</span>
+        </blockquote>
+        <p class="teacher__hint" id="quote-hint">Hover to hear me say it</p>
+      </div>
+      
+      <div class="teacher__bio fade-up">
+        <p>I've spent a decade in security operations, threat intelligence, and architecture — across SOC floors, vendor engineering teams, and quiet rooms where the actual decisions get made. I hold CISSP and OSCP, but the credentials that mattered most were the ones earned at 4am, slowly, with the wrong answer first.</p>
+        <p>This studio is what I wish someone had offered me at year three: a place to ask the slow questions without performing urgency. No bootcamps. No certifications sold as identity. Just practice, with someone who's been practicing longer.</p>
+      </div>
+      
+      <div class="teacher__meta fade-up">
+        <div class="teacher__meta-item">
+          <span class="eyebrow">Certifications</span>
+          <p>CISSP · OSCP · GREM</p>
+        </div>
+        <div class="teacher__meta-item">
+          <span class="eyebrow">Languages</span>
+          <p>Bahasa Indonesia<br>English</p>
+        </div>
+        <div class="teacher__meta-item">
+          <span class="eyebrow">Currently</span>
+          <p>Independent practice<br>Mentoring · Writing</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<!-- =========================  SCHEDULE  ========================= -->
+<section class="schedule" id="schedule">
+  <div class="section__header">
+    <div class="section__eyebrow fade-up">
+      <span class="section__eyebrow-line"></span>
+      <span class="eyebrow">This Week · 18 — 24 November</span>
+    </div>
+    <h2 class="section__title fade-up">When the studio is <em>open</em>.</h2>
+    <p class="section__lede fade-up">Small groups, six seats maximum. All sessions are remote unless marked Studio. Tap any row to see the room, the prerequisites, and what to bring.</p>
+  </div>
+  
+  <div class="schedule__container">
+    
+    <div class="schedule__week fade-up">
+      <div class="schedule__week-label">Week of November 18 — 24</div>
+      <div class="schedule__week-nav">
+        <button class="schedule__week-btn" aria-label="Previous week">‹</button>
+        <span class="schedule__week-current">This week</span>
+        <button class="schedule__week-btn" aria-label="Next week">›</button>
+      </div>
+    </div>
+    
+    <!-- Monday -->
+    <div class="schedule__day fade-up">
+      <div class="schedule__day-label">Monday · Nov 18</div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">06:30 — 07:30</span>
+          <span class="schedule__practice">Defensive Monitoring <em>· vinyasa</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>4 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote via Signal</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Comfortable with a SIEM interface. Bring one alert from your own environment that you didn't fully understand.</p></div>
+            <div><span class="eyebrow">Bring</span><p>Notepad, water, slow curiosity.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">12:00 — 13:00</span>
+          <span class="schedule__practice">Threat Intelligence <em>· yin</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-mid"></span>2 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio B — Cedar Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Some exposure to a TI platform. Bring one adversary you've been meaning to understand.</p></div>
+            <div><span class="eyebrow">Bring</span><p>Notes on that adversary. Patience for the long sit.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">19:00 — 20:00</span>
+          <span class="schedule__practice">Secure Architecture <em>· breathwork</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-full"></span>Full</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Currently designing or reviewing a system. Bring a diagram you're not proud of.</p></div>
+            <div><span class="eyebrow">Bring</span><p>The diagram. Willingness to redraw it twice.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tuesday -->
+    <div class="schedule__day fade-up">
+      <div class="schedule__day-label">Tuesday · Nov 19</div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">06:30 — 07:30</span>
+          <span class="schedule__practice">Defensive Monitoring <em>· vinyasa</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>5 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Monday's session useful but not required. Bring one log source you trust less than the others.</p></div>
+            <div><span class="eyebrow">Bring</span><p>That log source exported, anonymized.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">18:00 — 19:30</span>
+          <span class="schedule__practice">Incident Response Debrief <em>· restorative</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-mid"></span>3 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio C — Quiet Room · Remote, cameras optional</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>You've been part of an incident in the last 90 days. We're not solving it. We're sitting with it.</p></div>
+            <div><span class="eyebrow">Bring</span><p>One thing you wish you'd done differently. Optional to share aloud.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Wednesday -->
+    <div class="schedule__day fade-up">
+      <div class="schedule__day-label">Wednesday · Nov 20</div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">07:00 — 08:00</span>
+          <span class="schedule__practice">Threat Intelligence Deep Dive <em>· yin</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-low"></span>1 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio B — Cedar Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Yin practice attended before, or equivalent background reading. We sit with one campaign for the full hour.</p></div>
+            <div><span class="eyebrow">Bring</span><p>Notes from prior yin sessions. Tea.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">12:00 — 13:00</span>
+          <span class="schedule__practice">Defensive Monitoring <em>· vinyasa</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>4 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>None. This is the friendliest entry point.</p></div>
+            <div><span class="eyebrow">Bring</span><p>Anything you're curious about. Or nothing.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">19:00 — 20:00</span>
+          <span class="schedule__practice">Open Practice <em>· all postures</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-full"></span>Full</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>Any prior session. We work on whatever you brought this week.</p></div>
+            <div><span class="eyebrow">Bring</span><p>The thing you've been avoiding looking at.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Thursday -->
+    <div class="schedule__day fade-up">
+      <div class="schedule__day-label">Thursday · Nov 21</div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">06:30 — 07:30</span>
+          <span class="schedule__practice">Secure Architecture <em>· breathwork</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>5 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>One system you can draw on paper. We'll redraw it together.</p></div>
+            <div><span class="eyebrow">Bring</span><p>The drawing. Pencil preferred. Eraser accepted.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">18:00 — 19:00</span>
+          <span class="schedule__practice">Defensive Monitoring <em>· vinyasa</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>4 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>None.</p></div>
+            <div><span class="eyebrow">Bring</span><p>An alert chain you'd like to understand end-to-end.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Friday -->
+    <div class="schedule__day fade-up">
+      <div class="schedule__day-label">Friday · Nov 22</div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">07:00 — 08:00</span>
+          <span class="schedule__practice">Restorative <em>· incident recovery</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-full"></span>Full</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio C — Quiet Room · Remote, cameras optional</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>A week behind you. That's enough.</p></div>
+            <div><span class="eyebrow">Bring</span><p>Nothing. Seriously.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="schedule__row" data-row>
+        <div class="schedule__row-main">
+          <span class="schedule__time">12:00 — 13:00</span>
+          <span class="schedule__practice">Open Studio <em>· drop-in</em></span>
+          <span class="schedule__seats"><span class="seat-dot seat-dot-mid"></span>3 of 6 seats</span>
+          <span class="schedule__chev">+</span>
+        </div>
+        <div class="schedule__row-detail">
+          <div class="schedule__detail-inner">
+            <div><span class="eyebrow">Room</span><p>Studio A — Linen Room · Remote</p></div>
+            <div><span class="eyebrow">Prerequisites</span><p>None. Bring anything. Or just listen.</p></div>
+            <div><span class="eyebrow">Bring</span><p>A question. The slower the better.</p></div>
+            <div><span class="eyebrow">Teacher</span><p>Riesal</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="schedule__full-row fade-up">
+      The studio rests on Saturdays and Sundays. The internet will still be there on Monday.
+    </div>
+    
+  </div>
+</section>
+
+<!-- =========================  FIRST CLASS  ========================= -->
+<section class="first-class" id="first-class">
+  <div class="first-class__grid">
+    
+    <div class="first-class__left">
+      <div class="section__eyebrow fade-up">
+        <span class="section__eyebrow-line"></span>
+        <span class="eyebrow">First Class Free</span>
+      </div>
+      
+      <h2 class="first-class__title fade-up">Come sit with one question, for <em>fifty minutes</em>.</h2>
+      
+      <p class="first-class__lede fade-up">No sales call. No pitch. Bring something you're actually working on — a log you can't read, an architecture that won't sit still, a question that's been following you. We'll take it apart, slowly, and see what's actually there.</p>
+      
+      <ul class="first-class__notes fade-up">
+        <li>50 minutes, remote or in Jakarta studio</li>
+        <li>Bring one specific question or artifact</li>
+        <li>No preparation, no homework, no follow-up unless you ask</li>
+        <li>I read every form myself, usually within two business days</li>
+        <li>If we're not a fit, I'll say so — and suggest who might be</li>
+      </ul>
+    </div>
+    
+    <form class="first-class__form fade-up" id="booking-form">
+      <div class="form__row">
+        <label class="form__label" for="f-name">Your name</label>
+        <input class="form__input" type="text" id="f-name" name="name" required>
+      </div>
+      <div class="form__row">
+        <label class="form__label" for="f-email">Email</label>
+        <input class="form__input" type="email" id="f-email" name="email" required>
+      </div>
+      <div class="form__row">
+        <label class="form__label" for="f-window">Preferred window</label>
+        <select class="form__select" id="f-window" name="window">
+          <option>Weekday mornings (WIB)</option>
+          <option>Weekday afternoons (WIB)</option>
+          <option>Weekday evenings (WIB)</option>
+          <option>Weekend (WIB)</option>
+          <option>Other timezone — I'll suggest a time</option>
+        </select>
+      </div>
+      <div class="form__row">
+        <label class="form__label" for="f-why">What brings you to the practice?</label>
+        <textarea class="form__textarea" id="f-why" name="why" rows="4" placeholder="One paragraph is plenty. The slower you write this, the more useful our hour will be."></textarea>
+      </div>
+      <button type="submit" class="form__submit">
+        <span>Request a first conversation</span>
+        <span class="form__submit-arrow">→</span>
+      </button>
+      <p class="form__note">You'll hear back within two business days. No newsletter, no follow-up sequence, no automation.</p>
+    </form>
+    
+  </div>
+</section>
+
+</main>
+
+<!-- =========================  FOOTER  ========================= -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__brand-name">Riesal</div>
+      <div class="footer__brand-tag">A quiet security practice. Mentoring, consultation, and slow architecture review — from Jakarta, for the world that's tired of being told to move faster.</div>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <span class="eyebrow">Studio</span>
+        <a href="#practices">Practices</a>
+        <a href="#teacher">Teacher</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#first-class">First class</a>
+      </div>
+      <div class="footer__col">
+        <span class="eyebrow">Elsewhere</span>
+        <a href="#">LinkedIn</a>
+        <a href="#">Writing (rare)</a>
+        <a href="#">Reading list</a>
+      </div>
+      <div class="footer__col">
+        <span class="eyebrow">Contact</span>
+        <a href="mailto:hello@riesal.studio">hello@riesal.studio</a>
+        <a href="#">Signal — on request</a>
+        <a href="#">PGP key</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2024 Riesal · Practiced slowly, in Jakarta</span>
+    <span>Last updated · Nov 18</span>
+  </div>
+</footer>
+
+<!-- =========================  TOAST  ========================= -->
+<div class="toast" id="toast">
+  <span class="toast__dot"></span>
+  <span class="toast__text">Quiet chime enabled. You'll hear one soft tone the first time you scroll.</span>
+</div>
+
+<script>
+/* ============================
+   Fade-up on scroll
+   ============================ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+/* ============================
+   Nav scroll state
+   ============================ */
+const nav = document.getElementById('nav');
+let lastScrollY = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+  lastScrollY = y;
+}, { passive: true });
+
+/* ============================
+   Hero breath label cycle
+   4s inhale, 4s exhale — synced with CSS animation
+   ============================ */
+const breathLabel = document.getElementById('breath-label');
+let breathPhase = 'Inhale';
+breathLabel.textContent = 'Inhale';
+
+setInterval(() => {
+  breathPhase = breathPhase === 'Inhale' ? 'Exhale' : 'Inhale';
+  breathLabel.style.opacity = '0';
+  setTimeout(() => {
+    breathLabel.textContent = breathPhase;
+    breathLabel.style.opacity = '1';
+  }, 240);
+}, 4000);
+
+/* ============================
+   Live clock (Jakarta WIB, UTC+7)
+   ============================ */
+const clock = document.getElementById('clock');
+function updateClock() {
+  const now = new Date();
+  // Force Jakarta time regardless of viewer tz
+  const jakarta = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Jakarta' }));
+  const hh = String(jakarta.getHours()).padStart(2, '0');
+  const mm = String(jakarta.getMinutes()).padStart(2, '0');
+  clock.textContent = `${hh}:${mm}`;
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+/* ============================
+   Teacher quote — type out on hover
+   ============================ */
+const quoteWrap   = document.getElementById('quote-wrap');
+const quoteText   = document.getElementById('quote-text');
+const quoteCursor = document.getElementById('quote-cursor');
+const quoteHint   = document.getElementById('quote-hint');
+const fullText    = document.getElementById('teacher-quote').dataset.text;
+
+let typedOnce = false;
+let typeTimer = null;
+
+function typeOut() {
+  quoteText.textContent = '';
+  let i = 0;
+  const step = () => {
+    if (i < fullText.length) {
+      quoteText.textContent += fullText.charAt(i);
+      i++;
+      // Slight variable rhythm — pauses at commas and periods
+      const ch = fullText.charAt(i - 1);
+      let delay = 28;
+      if (ch === ',' || ch === '—') delay = 140;
+      if (ch === '.' || ch === '?') delay = 280;
+      typeTimer = setTimeout(step, delay);
+    } else {
+      // Keep cursor blinking after done
+    }
+  };
+  step();
+}
+
+quoteWrap.addEventListener('mouseenter', () => {
+  if (typedOnce) return;
+  typedOnce = true;
+  quoteHint.classList.add('is-hidden');
+  if (typeTimer) clearTimeout(typeTimer);
+  typeOut();
+});
+
+/* On touch devices, type out on first tap */
+quoteWrap.addEventListener('click', () => {
+  if (typedOnce) return;
+  typedOnce = true;
+  quoteHint.classList.add('is-hidden');
+  if (typeTimer) clearTimeout(typeTimer);
+  typeOut();
+});
+
+/* ============================
+   Schedule rows — expandable
+   ============================ */
+document.querySelectorAll('[data-row]').forEach(row => {
+  const main = row.querySelector('.schedule__row-main');
+  const detail = row.querySelector('.schedule__row-detail');
+  
+  main.addEventListener('click', () => {
+    const isOpen = row.classList.contains('is-open');
+    
+    // Close all other rows
+    document.querySelectorAll('[data-row].is-open').forEach(other => {
+      if (other !== row) {
+        other.classList.remove('is-open');
+        const d = other.querySelector('.schedule__row-detail');
+        d.style.maxHeight = '0';
+      }
+    });
+    
+    if (isOpen) {
+      row.classList.remove('is-open');
+      detail.style.maxHeight = '0';
+    } else {
+      row.classList.add('is-open');
+      detail.style.maxHeight = detail.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ============================
+   Quiet chime — opt-in, plays once on first scroll
+   ============================ */
+const chimeToggle = document.getElementById('chime-toggle');
+const toast = document.getElementById('toast');
+let chimeEnabled = false;
+let chimePlayed = false;
+let audioCtx = null;
+
+function showToast(message) {
+  toast.querySelector('.toast__text').textContent = message;
+  toast.classList.add('is-visible');
+  setTimeout(() => toast.classList.remove('is-visible'), 4500);
+}
+
+function playChime() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  const now = audioCtx.currentTime;
+  
+  // Two sine waves — perfect fifth (C5 + G5), slightly detuned for warmth
+  const osc1 = audioCtx.createOscillator();
+  const osc2 = audioCtx.createOscillator();
+  osc1.type = 'sine';
+  osc2.type = 'sine';
+  osc1.frequency.value = 523.25;  // C5
+  osc2.frequency.value = 783.99;  // G5
+  osc1.detune.value = -4;
+  osc2.detune.value = +4;
+  
+  const gain = audioCtx.createGain();
+  gain.gain.setValueAtTime(0, now);
+  gain.gain.linearRampToValueAtTime(0.07, now + 0.04);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + 4);
+  
+  // Soft lowpass to round off any harshness
+  const filter = audioCtx.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 2400;
+  filter.Q.value = 0.5;
+  
+  osc1.connect(gain);
+  osc2.connect(gain);
+  gain.connect(filter);
+  filter.connect(audioCtx.destination);
+  
+  osc1.start(now);
+  osc2.start(now);
+  osc1.stop(now + 4);
+  osc2.stop(now + 4);
+}
+
+chimeToggle.addEventListener('click', () => {
+  chimeEnabled = !chimeEnabled;
+  chimeToggle.classList.toggle('is-on', chimeEnabled);
+  
+  if (chimeEnabled) {
+    // Init audio context within user gesture
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    chimePlayed = false;  // reset so they get a chime next scroll
+    showToast('Quiet chime enabled. You\'ll hear one soft tone the first time you scroll.');
+  } else {
+    showToast('Quiet chime muted.');
+  }
+});
+
+let chimeScrollHandler = () => {
+  if (chimeEnabled && !chimePlayed && window.scrollY > 60) {
+    chimePlayed = true;
+    playChime();
+    window.removeEventListener('scroll', chimeScrollHandler);
+  }
+};
+window.addEventListener('scroll', chimeScrollHandler, { passive: true });
+
+/* ============================
+   Form submit — fake submit, show thanks
+   ============================ */
+const form = document.getElementById('booking-form');
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const thanks = document.createElement('div');
+  thanks.className = 'form__thanks';
+  thanks.innerHTML = `
+    <div class="form__thanks-mark">—</div>
+    <div class="form__thanks-title">Your request is in.</div>
+    <div class="form__thanks-body">I read every form myself, usually within two business days. If you don't hear from me by then, something went wrong with the form — write to <em>hello@riesal.studio</em> directly. In the meantime, breathe.</div>
+  `;
+  form.innerHTML = '';
+  form.appendChild(thanks);
+});
+
+/* ============================
+   Reduced motion guard
+   ============================ */
+if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.fade-up').forEach(el => el.classList.add('is-in'));
+}
+</script>
+
+</body>
+</html>
