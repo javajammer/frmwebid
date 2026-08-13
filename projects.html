@@ -1535,7 +1535,7 @@ h1, h2, h3, h4 {
 
 <!-- =========================  NAV  ========================= -->
 <header class="nav" id="nav">
-  <a href="#" class="nav__brand" style="text-decoration:none;color:inherit;">
+  <a href="/" class="nav__brand" style="text-decoration:none;color:inherit;">
     Muhammad Fahrizal Rahman
     <span class="nav__brand-meta">Software, practiced patiently</span>
   </a>
@@ -1558,7 +1558,7 @@ h1, h2, h3, h4 {
   <div class="hero__left">
     <div class="hero__eyebrow fade-up">
       <span class="hero__eyebrow-line"></span>
-      <span class="eyebrow">A small software studio · Jakarta &amp; remote · since 2018</span>
+      <span class="eyebrow">A small software studio · Jakarta &amp; remote · since 2020</span>
     </div>
     
     <h1 class="hero__title fade-up" style="transition-delay:80ms">
@@ -1578,8 +1578,8 @@ h1, h2, h3, h4 {
     </div>
     
     <p class="hero__free fade-up" style="transition-delay:360ms">
-      <strong>Open source by default</strong> · self-hostable · documented
-    </p>
+      <!--<strong>Open source by default</strong> · self-hostable · documented
+    </p>-->
   </div>
   
   <div class="hero__right fade-up" style="transition-delay:240ms">
@@ -1622,7 +1622,7 @@ h1, h2, h3, h4 {
     <article class="practice fade-up">
       <div class="practice__image">
         <span class="practice__num">01</span>
-        <span class="practice__status is-stable">Stable · v1.4</span>
+        <span class="practice__status is-stable">Stable · v2.2.0</span>
         <img src="https://picsum.photos/seed/linnaea-log-triage-warm-ui/720/900" alt="Linnaea — log triage interface">
       </div>
       <div class="practice__label">— Vinyasa —</div>
@@ -1638,27 +1638,27 @@ h1, h2, h3, h4 {
         <a href="https://github.com/javajammer/bagipdf" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
       </div>
     </article>
-    <!--
+    
     <article class="practice fade-up" style="transition-delay:120ms">
       <div class="practice__image">
         <span class="practice__num">02</span>
-        <span class="practice__status is-stable">Stable · v2.0</span>
+        <span class="practice__status is-stable">Stable · v1.8</span>
         <img src="https://picsum.photos/seed/slowlook-notebook-citation-graph/720/900" alt="Slowlook — research notebook">
       </div>
       <div class="practice__label">— Yin —</div>
-      <h3 class="practice__name">Slowlook <span class="practice__version">research notebook</span></h3>
-      <p class="practice__desc">A notebook for slow research. Markdown-first, offline by default, with citation graphs that survive the next platform migration. Sit with one adversary, one dataset, one question for a week — the notebook holds the thread.</p>
+      <h3 class="practice__name">Novenaku <span class="practice__version">Catholic Novena Prayer and Local Church Locator</span></h3>
+      <p class="practice__desc">Novenaku: Your Daily Catholic Prayer Companion. Pray 100+ traditional prayers, 50+ novenas, and the Rosary with daily guidance. Grow your faith offline. Download free!</p>
       <ul class="practice__meta">
-        <li>Stack · Python · SQLite · Markdown</li>
-        <li>Pace · Slow, held</li>
-        <li>License · Apache 2.0</li>
+        <li>Stack · Kotlin · SQLite · Playwright</li>
+        <li>Distribution · Android · IOS</li>
+        <li>License · MIT</li>
       </ul>
       <div class="practice__links">
-        <a href="#" class="practice__link">Live demo <span class="practice__link-arrow">→</span></a>
-        <a href="#" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
+        <a href="https://github.com/javajammer/novenaku-mobile/releases/download/1.0/novenaku.apk" class="practice__link">Download APK <span class="practice__link-arrow">→</span></a>
+        <a href="https://github.com/javajammer/novenaku-mobile" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
       </div>
     </article>
-    
+    <!--
     <article class="practice fade-up" style="transition-delay:200ms">
       <div class="practice__image">
         <span class="practice__num">03</span>
@@ -1713,7 +1713,7 @@ h1, h2, h3, h4 {
       </div>
       <div class="teacher__caption fade-up">
         <span class="teacher__caption-line"></span>
-        <span class="eyebrow">Rizal · Jakarta · Since 2009</span>
+        <span class="eyebrow">Rizal · Jakarta · Since 2020</span>
       </div>
     </div>
     
@@ -1740,7 +1740,7 @@ h1, h2, h3, h4 {
       <div class="teacher__meta fade-up">
         <div class="teacher__meta-item">
           <span class="eyebrow">Stack</span>
-          <p>Go · TypeScript<br>Python · Rust</p>
+          <p>Go · TypeScript<br>Python · Rust · Kotlin · Bash</p>
         </div>
         <div class="teacher__meta-item">
           <span class="eyebrow">Focus</span>
@@ -1757,6 +1757,7 @@ h1, h2, h3, h4 {
 </section>
 
 <!-- =========================  RELEASES  ========================= -->
+<!--
 <section class="schedule" id="releases">
   <div class="section__header">
     <div class="section__eyebrow fade-up">
@@ -1986,8 +1987,10 @@ h1, h2, h3, h4 {
     </div>
   </div>
   <div class="footer__bottom">
-    <span>© 2024 Rizal · Built patiently, in Jakarta</span>
-    <span>Last updated · 2026</span>
+<span>© <span id="year"></span> Rizal · Built patiently, in Jakarta</span>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
   </div>
 </footer>
 
