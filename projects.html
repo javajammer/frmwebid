@@ -852,12 +852,13 @@ h1, h2, h3, h4 {
 }
 
 .teacher__image {
-  width: 100%;
-  aspect-ratio: 4/5;
+  width: min(100%, 420px);
+  aspect-ratio: 1/1;
   overflow: hidden;
-  border-radius: 3px;
+  border-radius: 50%;
   position: relative;
   background: var(--bg-deep);
+  border: 3px solid var(--line);
 }
 
 .teacher__image img {
@@ -1555,7 +1556,7 @@ h1, h2, h3, h4 {
     
     <div class="teacher__left">
       <div class="teacher__image fade-up">
-        <img loading="lazy" decoding="async" width="720" height="900" src="/assets/portrait.jpg" alt="Muhammad Fahrizal Rahman, software engineer building BagiPDF and Novenaku">
+        <img loading="lazy" decoding="async" width="200" height="200" src="/assets/portrait.jpg" alt="Muhammad Fahrizal Rahman, software engineer building BagiPDF and Novenaku">
       </div>
       <div class="teacher__caption fade-up">
         <span class="teacher__caption-line"></span>
