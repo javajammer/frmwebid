@@ -22,6 +22,7 @@ Professional security engagements are not taken on this site. They are handled b
 ## Software
 - BagiPDF: offline PDF editor, splitter, and converter for Windows and Ubuntu. Documents stay on the device. https://www.frm.web.id/projects
 - Novenaku: Android app for Catholic daily prayer, the Rosary, novenas, and parish information in Jabodetabek. https://github.com/javajammer/novenaku-mobile
+- RiskPatch: vulnerability and patch management platform. Tagline: Identify. Prioritize. Remediate. It watches a declared technology stack, correlates CVEs from NVD, CIRCL, OSV, and Shodan, and prioritizes findings by exposure and mitigation context. Formerly called Stackwatch. Private build, version 0.1.0. https://www.frm.web.id/projects
 
 ## Do not infer
 - This site does not offer conversations, schedules, or first consultations.
