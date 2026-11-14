@@ -1,12 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Software, practiced patiently</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- =========================  SEO META TAGS  ========================= -->
+<title>BagiPDF & Novenaku: Software Offline & Aplikasi Doa Katolik | Rizal</title>
+<meta name="description" content="BagiPDF adalah software offline untuk split, merge, convert, dan protect PDF tanpa upload ke cloud. Novenaku adalah aplikasi Android doa harian, rosario, dan novena Katolik.">
+<meta name="keywords" content="bagipdf, software pdf offline, pemecah pdf, penggabung pdf, konverter pdf, novenaku, aplikasi doa katolik, aplikasi rosario, novena katolik android, aplikasi paroki">
+<meta name="author" content="Muhammad Fahrizal Rahman">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://frm.web.id/">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://frm.web.id/">
+<meta property="og:title" content="BagiPDF & Novenaku: Software Offline & Aplikasi Doa Katolik">
+<meta property="og:description" content="Software PDF offline yang aman dan privasi, serta aplikasi doa Katolik (Rosario, Novena) lengkap untuk Android.">
+<meta property="og:image" content="https://www.frm.web.id/assets/og.jpg">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BagiPDF & Novenaku: Software Offline & Aplikasi Doa Katolik">
+<meta name="twitter:description" content="Software PDF offline yang aman dan privasi, serta aplikasi doa Katolik (Rosario, Novena) lengkap untuk Android.">
+<meta name="twitter:image" content="https://www.frm.web.id/assets/og.jpg">
+
+<!-- =========================  STRUCTURED DATA (JSON-LD)  ========================= -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "BagiPDF",
+      "operatingSystem": "Windows, Ubuntu Linux",
+      "applicationCategory": "UtilitiesApplication",
+      "downloadUrl": "https://github.com/javajammer/frmwebid/raw/main/packages/BagiPDF_2.4.2_Windows.msi",
+      "description": "BagiPDF adalah software offline untuk memecah, menggabungkan, mengonversi, dan memproteksi file PDF. Data Anda tetap aman di komputer tanpa diunggah ke cloud.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "124"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Novenaku",
+      "operatingSystem": "Android, iOS",
+      "applicationCategory": "LifestyleApplication",
+      "downloadUrl": "https://github.com/javajammer/novenaku-mobile/releases/download/1.0/novenaku.apk",
+      "description": "Novenaku adalah aplikasi Android untuk doa harian Katolik, Novena, Rosario, dan pencarian gereja paroki terdekat di Jabodetabek.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "IDR"
+      }
+    },
+    {
+      "@type": "Person",
+      "name": "Muhammad Fahrizal Rahman",
+      "url": "https://frm.web.id",
+      "sameAs": [
+        "https://github.com/javajammer",
+        "https://www.linkedin.com/in/riesal"
+      ],
+      "jobTitle": "Software Engineer"
+    }
+  ]
+}
+</script>
+
+<link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:300 600;font-display:swap;src:url('/assets/fonts/fraunces-latin.woff2') format('woff2');}
+@font-face{font-family:'Fraunces';font-style:italic;font-weight:300 400;font-display:swap;src:url('/assets/fonts/fraunces-latin-italic.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 500;font-display:swap;src:url('/assets/fonts/inter-latin.woff2') format('woff2');}
+</style>
+
 <style>
 /* ============================
    Tokens
@@ -920,211 +996,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================
-   Releases (was Schedule)
-   ============================ */
-.schedule {
-  background: var(--bg-warm);
-  padding: 8rem 3rem;
-  position: relative;
-}
-
-.schedule::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--line), transparent);
-}
-
-.schedule__container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.schedule__week {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 3rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.schedule__week-label {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  color: var(--ink);
-}
-
-.schedule__week-nav {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.schedule__week-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 1rem;
-  color: var(--ink-soft);
-  transition: all 300ms var(--ease-quiet);
-}
-
-.schedule__week-btn:hover {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-
-.schedule__week-current {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin: 0 0.5rem;
-}
-
-.schedule__day {
-  margin-bottom: 2.5rem;
-}
-
-.schedule__day-label {
-  font-family: 'Fraunces', serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--sage-deep);
-  letter-spacing: 0.02em;
-  margin-bottom: 0.75rem;
-  font-style: italic;
-}
-
-.schedule__row {
-  border-bottom: 1px solid var(--line-soft);
-  cursor: pointer;
-  transition: background 300ms var(--ease-quiet);
-}
-
-.schedule__row:hover {
-  background: rgba(255, 250, 235, 0.5);
-}
-
-.schedule__row.is-open {
-  background: var(--bg-card);
-}
-
-.schedule__row-main {
-  display: grid;
-  grid-template-columns: 130px 1fr 140px 24px;
-  align-items: center;
-  gap: 2rem;
-  padding: 1.25rem 1rem;
-}
-
-.schedule__time {
-  font-family: 'Fraunces', serif;
-  font-size: 0.95rem;
-  color: var(--ink);
-  font-weight: 400;
-  letter-spacing: 0.005em;
-}
-
-.schedule__practice {
-  font-size: 0.97rem;
-  color: var(--ink);
-  font-weight: 400;
-}
-
-.schedule__practice em {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  color: var(--terracotta);
-  font-size: 0.88rem;
-  margin-left: 0.5rem;
-}
-
-.schedule__seats {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  font-weight: 500;
-}
-
-.seat-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.seat-dot-high { background: var(--sage); }
-.seat-dot-mid  { background: var(--terracotta); }
-.seat-dot-low  { background: var(--dusk); }
-.seat-dot-full { background: var(--ink-mute); opacity: 0.5; }
-
-.schedule__chev {
-  font-family: 'Fraunces', serif;
-  font-size: 1.3rem;
-  color: var(--ink-mute);
-  transition: transform 400ms var(--ease-quiet);
-  text-align: center;
-  font-weight: 300;
-}
-
-.schedule__row.is-open .schedule__chev {
-  transform: rotate(45deg);
-  color: var(--terracotta);
-}
-
-.schedule__row-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 500ms var(--ease-quiet);
-}
-
-.schedule__detail-inner {
-  padding: 0 1rem 1.75rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.schedule__detail-inner > div .eyebrow {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.schedule__detail-inner > div p {
-  font-size: 0.88rem;
-  color: var(--ink-soft);
-  line-height: 1.55;
-}
-
-.schedule__full-row {
-  text-align: center;
-  padding: 2rem;
-  font-family: 'Fraunces', serif;
-  font-style: italic;
-  color: var(--ink-mute);
-  font-size: 0.95rem;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-/* ============================
-   Contact (was First Class)
+   Contact
    ============================ */
 .first-class {
   padding: 9rem 3rem;
@@ -1471,19 +1343,6 @@ h1, h2, h3, h4 {
   .teacher__grid { grid-template-columns: 1fr; gap: 3rem; }
   .teacher__left { position: relative; top: 0; }
   
-  .schedule { padding: 5rem 1.5rem; }
-  .schedule__row-main {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    padding: 1rem 0.75rem;
-  }
-  .schedule__seats { font-size: 10px; }
-  .schedule__detail-inner {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    padding: 0 0.75rem 1.5rem;
-  }
-  
   .first-class { padding: 5rem 1.5rem; }
   .first-class__grid { grid-template-columns: 1fr; gap: 3rem; }
   .first-class__left { position: relative; top: 0; }
@@ -1510,8 +1369,6 @@ h1, h2, h3, h4 {
   .teacher__quote-wrap { padding: 1.75rem; }
   .teacher__quote { font-size: 1.1rem; }
   
-  .schedule__detail-inner { grid-template-columns: 1fr; }
-  
   .footer__cols { grid-template-columns: 1fr; }
 }
 
@@ -1537,12 +1394,11 @@ h1, h2, h3, h4 {
 <header class="nav" id="nav">
   <a href="/" class="nav__brand" style="text-decoration:none;color:inherit;">
     Muhammad Fahrizal Rahman
-    <span class="nav__brand-meta">Things I Build</span>
+    <span class="nav__brand-meta">Software Engineer</span>
   </a>
   <nav class="nav__links">
     <a href="#projects" class="nav__link">Projects</a>
     <a href="#maker" class="nav__link">Why I Build</a>
-    <!-- <a href="#releases" class="nav__link">Releases</a> -->
     <a href="#contact" class="nav__link">Contact</a>
     <button class="nav__chime" id="chime-toggle" aria-label="Toggle quiet chime">
       <span class="nav__chime-dot"></span>
@@ -1562,12 +1418,12 @@ h1, h2, h3, h4 {
     </div>
     
       <h1 class="hero__title fade-up" style="transition-delay:80ms">
-        Software,<br>
-        made with <em>care</em>.
+        BagiPDF & Novenaku:<br>
+        Software, made with <em>care</em>.
       </h1>
     
       <p class="hero__sub fade-up" style="transition-delay:180ms">
-        I'm Rizal. Sometimes I build software. Usually it's because I need something, can't find something that feels right, or become curious enough about a problem that building the thing seems easier than continuing to think about it. These are some of the things I've made, kept, and occasionally released. No startup thesis. No growth plan. Just useful software, interesting problems, and a preference for things that stay simple.
+        I'm Rizal. I build software like BagiPDF, a secure offline PDF editor and converter, and Novenaku, a Catholic prayer app for Android. Usually it's because I need something, can't find something that feels right, or become curious enough about a problem. No startup thesis. No growth plan. Just useful software, interesting problems, and a preference for things that stay simple.
       </p>
     
     <div class="hero__actions fade-up" style="transition-delay:280ms">
@@ -1584,7 +1440,7 @@ h1, h2, h3, h4 {
   
   <div class="hero__right fade-up" style="transition-delay:240ms">
     <div class="hero__visual">
-      <img class="hero__image" src="https://picsum.photos/seed/morning-desk-software-craft-warm/900/1180" alt="A quiet desk in morning light">
+      <img class="hero__image" src="/assets/desk.jpg" width="900" height="1180" decoding="async" fetchpriority="high" alt="Developer desk setup featuring BagiPDF software and Novenaku app">
       <div class="hero__sunbeam"></div>
       <div class="hero__overlay"></div>
     </div>
@@ -1622,20 +1478,20 @@ h1, h2, h3, h4 {
     <article class="practice fade-up">
       <div class="practice__image">
         <span class="practice__num">01</span>
-        <span class="practice__status is-stable">Stable · v2.2.0</span>
-        <img src="https://picsum.photos/seed/linnaea-log-triage-warm-ui/720/900" alt="Linnaea — log triage interface">
+        <span class="practice__status is-stable">Stable · v2.4.2</span>
+        <img loading="lazy" decoding="async" width="720" height="900" src="/assets/bagipdf.jpg" alt="BagiPDF offline PDF editor interface for Windows and Ubuntu">
       </div>
-      <div class="practice__label">— Privacy —</div>
-      <h3 class="practice__name">BagiPDF <span class="practice__version">PDF Editor, Splitter, Converter</span></h3>
-      <p class="practice__desc">A small PDF toolkit for people who would rather keep their documents on their own machine. BagiPDF lets you split, protect, lock, and manage PDF files locally — without sending documents to a cloud service. Built for offline workflows, with zero telemetry. Your documents stay on your device.</p>
+      <div class="practice__label">— Privacy First —</div>
+      <h3 class="practice__name">BagiPDF <span class="practice__version">Offline PDF Editor, Splitter & Converter</span></h3>
+      <p class="practice__desc">A powerful offline PDF toolkit for Windows and Ubuntu. BagiPDF lets you split, merge, convert, protect, and lock PDF files locally — without sending documents to a cloud service. Built for offline workflows with zero telemetry, ensuring your sensitive documents stay strictly on your device.</p>
       <ul class="practice__meta">
-        <li>Stack · Javascript · Rust</li>
-        <li>Distribution · Windows · Ubuntu Linux</li>
+        <li>Stack · JavaScript · Rust</li>
+        <li>Distribution · Windows (.msi) · Ubuntu Linux (.deb)</li>
         <li>License · MIT</li>
       </ul>
       <div class="practice__links">
-        <a href="https://github.com/javajammer/bagipdf/releases" class="practice__link">Download <span class="practice__link-arrow">→</span></a>
-        <a href="https://github.com/javajammer/bagipdf" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
+        <a href="https://github.com/javajammer/frmwebid/raw/main/packages/BagiPDF_2.4.2_Windows.msi" class="practice__link">Download for Windows <span class="practice__link-arrow">→</span></a>
+        <a href="https://github.com/javajammer/frmwebid/raw/main/packages/BagiPDF_2.4.2_UbuntuLinux.deb" class="practice__link">Download for Ubuntu <span class="practice__link-arrow">→</span></a>
       </div>
     </article>
     
@@ -1643,63 +1499,22 @@ h1, h2, h3, h4 {
       <div class="practice__image">
         <span class="practice__num">02</span>
         <span class="practice__status is-stable">Stable · v1.0</span>
-        <img src="https://picsum.photos/seed/slowlook-notebook-citation-graph/720/900" alt="Slowlook — research notebook">
+        <img loading="lazy" decoding="async" width="720" height="900" src="/assets/novenaku.jpg" alt="Novenaku Catholic prayer and Rosary app for Android">
       </div>
       <div class="practice__label">— Community —</div>
-      <h3 class="practice__name">Novenaku <span class="practice__version">Catholic Prayer and Local Church Companion</span></h3>
-      <p class="practice__desc">A small Android application built around daily prayer, traditional prayers, novenas, the Rosary, and finding local churches. It includes more than 100 traditional prayers, 50+ novenas, daily Rosary guidance, and information for hundreds of parishes across Jabodetabek. Built as a personal project and shared openly for anyone who finds it useful.</p>
+      <h3 class="practice__name">Novenaku <span class="practice__version">Catholic Prayer & Rosary App</span></h3>
+      <p class="practice__desc">A minimalist Android application built around daily prayer, the Holy Rosary, Novenas, and finding local Catholic churches. It includes more than 100 traditional prayers, 50+ Novenas, daily Rosary guidance, and information for hundreds of parishes across Jabodetabek. Built as a personal project and shared openly.</p>
       <ul class="practice__meta">
         <li>Stack · Kotlin · SQLite · Playwright</li>
-        <li>Distribution · Android · IOS</li>
+        <li>Distribution · Android · iOS</li>
         <li>License · MIT</li>
       </ul>
       <div class="practice__links">
         <a href="https://github.com/javajammer/novenaku-mobile/releases/download/1.0/novenaku.apk" class="practice__link">Download APK <span class="practice__link-arrow">→</span></a>
-        <a href="https://github.com/javajammer/novenaku-mobile" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
+        <a href="https://github.com/javajammer/novenaku-mobile" class="practice__link">Source Code <span class="practice__link-arrow">→</span></a>
       </div>
     </article>
-    <!--
-    <article class="practice fade-up" style="transition-delay:200ms">
-      <div class="practice__image">
-        <span class="practice__num">03</span>
-        <span class="practice__status is-beta">Beta · v0.8</span>
-        <img src="https://picsum.photos/seed/steadyhand-runbook-quiet-cli/720/900" alt="Steadyhand — runbook runner">
-      </div>
-      <div class="practice__label">— Restorative —</div>
-      <h3 class="practice__name">Steadyhand <span class="practice__version">runbook runner</span></h3>
-      <p class="practice__desc">An incident response runbook runner that slows teams down on purpose. Each step requires a confirmation, a breath, a witness. Designed for the 3am call where the worst decisions feel urgent — and where most damage actually happens.</p>
-      <ul class="practice__meta">
-        <li>Stack · Python · Ansible · CLI</li>
-        <li>Pace · Slowed, deliberate</li>
-        <li>License · MIT</li>
-      </ul>
-      <div class="practice__links">
-        <a href="#" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
-        <a href="#" class="practice__link">Docs <span class="practice__link-arrow">→</span></a>
-      </div>
-    </article>
-    
-    <article class="practice fade-up" style="transition-delay:280ms">
-      <div class="practice__image">
-        <span class="practice__num">04</span>
-        <span class="practice__status is-stable">Stable · v3.1</span>
-        <img src="https://picsum.photos/seed/bedrock-policy-library-foundational/720/900" alt="Bedrock — policy library">
-      </div>
-      <div class="practice__label">— Breathwork —</div>
-      <h3 class="practice__name">Bedrock <span class="practice__version">policy library</span></h3>
-      <p class="practice__desc">A small policy-as-code library for cloud infrastructure. Not the cleverest pattern — the one you can keep for years. Reads like prose, fails loudly, never surprises you on a Friday afternoon deploy.</p>
-      <ul class="practice__meta">
-        <li>Stack · TypeScript · OPA · YAML</li>
-        <li>Pace · Foundational, ongoing</li>
-        <li>License · MIT</li>
-      </ul>
-      <div class="practice__links">
-        <a href="#" class="practice__link">Source <span class="practice__link-arrow">→</span></a>
-        <a href="#" class="practice__link">Docs <span class="practice__link-arrow">→</span></a>
-        <a href="#" class="practice__link">npm <span class="practice__link-arrow">→</span></a>
-      </div>
-    </article>
-    -->
+
   </div>
 </section>
 
@@ -1709,7 +1524,7 @@ h1, h2, h3, h4 {
     
     <div class="teacher__left">
       <div class="teacher__image fade-up">
-        <img src="https://picsum.photos/seed/fahrizal-quiet-maker-portrait/720/900" alt="Portrait of rizal">
+        <img loading="lazy" decoding="async" width="720" height="900" src="/assets/portrait.jpg" alt="Muhammad Fahrizal Rahman, software engineer building BagiPDF and Novenaku">
       </div>
       <div class="teacher__caption fade-up">
         <span class="teacher__caption-line"></span>
@@ -1741,161 +1556,17 @@ h1, h2, h3, h4 {
       <div class="teacher__meta fade-up">
         <div class="teacher__meta-item">
           <span class="eyebrow">Stack</span>
-          <p>Go · TypeScript<br>Python · Rust · Kotlin · Bash</p>
+          <p>Go · TypeScript<br>Python · Rust · Kotlin</p>
         </div>
         <div class="teacher__meta-item">
           <span class="eyebrow">Focus</span>
-          <p>Security tooling<br>Infra · CLI · DX</p>
+          <p>Security Tooling<br>Infra · CLI · DX</p>
         </div>
          <div class="teacher__meta-item">
            <span class="eyebrow">Currently</span>
            <p>Building small things · Learning things I don't understand yet · Writing down what survives the learning</p>
          </div>
       </div>
-    </div>
-    
-  </div>
-</section>
-
-<!-- =========================  RELEASES  ========================= -->
-<!--
-<section class="schedule" id="releases">
-  <div class="section__header">
-    <div class="section__eyebrow fade-up">
-      <span class="section__eyebrow-line"></span>
-      <span class="eyebrow">This Quarter · October — December</span>
-    </div>
-    <h2 class="section__title fade-up">What's been <em>shipped</em>.</h2>
-    <p class="section__lede fade-up">Every release is small, dated, and documented. No silent patches, no surprise breaking changes, no "major rewrite" disguised as v2. Tap any row to read the changelog entry.</p>
-  </div>
-  
-  <div class="schedule__container">
-    
-    <div class="schedule__week fade-up">
-      <div class="schedule__week-label">Quarter of October — December</div>
-      <div class="schedule__week-nav">
-        <button class="schedule__week-btn" aria-label="Previous quarter">‹</button>
-        <span class="schedule__week-current">This quarter</span>
-        <button class="schedule__week-btn" aria-label="Next quarter">›</button>
-      </div>
-    </div>
-    
-    <!-- October -->
-    <!--
-    <div class="schedule__day fade-up">
-      <div class="schedule__day-label">October · Q4</div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v3.1.0 · Nov 12</span>
-          <span class="schedule__practice">Bedrock <em>· policy packs for AWS Orgs</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>Stable</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>Organization-level policy packs, SCP review helpers, and a new <em>explain</em> subcommand that prints the why behind each rule.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>None. Additive only.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>AWS, LocalStack, OPA 0.62+</p></div>
-            <div><span class="eyebrow">Notes</span><p>Documentation rewritten to be readable end-to-end, not as reference.</p></div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v2.0.0 · Oct 28</span>
-          <span class="schedule__practice">Slowlook <em>· citation graph rewrite</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-mid"></span>Major</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>Citation graph rebuilt as a first-class object. Notebooks can now trace a claim back through every source it depends on, with confidence levels.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>Notebook format v1 → v2. Migration script included. Read it before running.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>Python 3.10+, macOS, Linux</p></div>
-            <div><span class="eyebrow">Notes</span><p>This is the release I've been working toward for two years.</p></div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v1.4.2 · Oct 15</span>
-          <span class="schedule__practice">Linnaea <em>· sigma rule import</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>Patch</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>Sigma rule import. Better handling of nested JSON in alert payloads. Three small bugs fixed in the timeline view.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>None.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>Go 1.21+, SQLite 3.40+</p></div>
-            <div><span class="eyebrow">Notes</span><p>Thanks to two contributors who filed the bugs.</p></div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v0.8.0 · Oct 02</span>
-          <span class="schedule__practice">Steadyhand <em>· first public beta</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-low"></span>Beta</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>First public beta. Three built-in runbooks (credential rotation, host isolation, evidence collection). Witness log is append-only.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>n/a — first public release.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>Python 3.10+, Ansible 2.14+</p></div>
-            <div><span class="eyebrow">Notes</span><p>Please break it and tell me how.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- September -->
-    <!--
-    <div class="schedule__day fade-up">
-      <div class="schedule__day-label">September · Q3</div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v3.0.0 · Sep 18</span>
-          <span class="schedule__practice">Bedrock <em>· TypeScript rewrite</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-mid"></span>Major</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>Rewritten from Python to TypeScript. Same API surface, half the dependencies, three times the startup speed.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>Python version archived on a branch. Will receive security fixes for one more year.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>Node 20+, Bun 1.1+</p></div>
-            <div><span class="eyebrow">Notes</span><p>I held off on this for eighteen months. Glad I waited.</p></div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="schedule__row" data-row>
-        <div class="schedule__row-main">
-          <span class="schedule__time">v1.4.0 · Sep 04</span>
-          <span class="schedule__practice">Linnaea <em>· multi-source timeline</em></span>
-          <span class="schedule__seats"><span class="seat-dot seat-dot-high"></span>Minor</span>
-          <span class="schedule__chev">+</span>
-        </div>
-        <div class="schedule__row-detail">
-          <div class="schedule__detail-inner">
-            <div><span class="eyebrow">Scope</span><p>Timeline view now supports multiple log sources side-by-side. Correlation keys are configurable.</p></div>
-            <div><span class="eyebrow">Breaking</span><p>None. Config keys renamed but old names still work.</p></div>
-            <div><span class="eyebrow">Tested on</span><p>Go 1.21+</p></div>
-            <div><span class="eyebrow">Notes</span><p>Performance is roughly the same. Did not optimize prematurely.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="schedule__full-row fade-up">
-      The studio rests on Saturdays and Sundays. deploys happen on Tuesdays and Thursdays only — never on a Friday.
     </div>
     
   </div>
@@ -1917,8 +1588,8 @@ h1, h2, h3, h4 {
       
       <ul class="first-class__notes fade-up">
         <li>I read every message myself</li>
-	<li>No sales call - No newsletter - No follow-up sequence</li>
-	<li>No promise that I'll build your idea</li>
+    <li>No sales call - No newsletter - No follow-up sequence</li>
+    <li>No promise that I'll build your idea</li>
         <li>If I can't help, I'll say so — and suggest who might</li>
       </ul>
     </div>
@@ -1935,7 +1606,7 @@ h1, h2, h3, h4 {
       <div class="form__row">
         <label class="form__label" for="f-window">What's this about</label>
         <select class="form__select" id="f-window" name="window">
-          <option>Using one of your projects</option>
+          <option>Using BagiPDF or Novenaku</option>
           <option>A problem I'd like your take on</option>
           <option>Just want to talk shop</option>
           <option>Something else — I'll explain below</option>
@@ -1969,7 +1640,6 @@ h1, h2, h3, h4 {
         <span class="eyebrow">Site</span>
         <a href="#projects">Projects</a>
         <a href="#maker">Why I Build</a>
-	<!-- <a href="#releases">Releases</a> -->
         <a href="#contact">Contact</a>
       </div>
       <div class="footer__col">
@@ -1977,7 +1647,6 @@ h1, h2, h3, h4 {
         <a href="https://github.com/javajammer">GitHub</a>
         <a href="https://www.linkedin.com/in/riesal">LinkedIn</a>
         <a href="#">Writing (rare)</a>
-        <a href="#">Reading list</a>
       </div>
       <div class="footer__col">
         <span class="eyebrow">Contact</span>
@@ -2096,32 +1765,6 @@ quoteWrap.addEventListener('click', () => {
   quoteHint.classList.add('is-hidden');
   if (typeTimer) clearTimeout(typeTimer);
   typeOut();
-});
-
-/* Release rows — expandable */
-document.querySelectorAll('[data-row]').forEach(row => {
-  const main = row.querySelector('.schedule__row-main');
-  const detail = row.querySelector('.schedule__row-detail');
-  
-  main.addEventListener('click', () => {
-    const isOpen = row.classList.contains('is-open');
-    
-    document.querySelectorAll('[data-row].is-open').forEach(other => {
-      if (other !== row) {
-        other.classList.remove('is-open');
-        const d = other.querySelector('.schedule__row-detail');
-        d.style.maxHeight = '0';
-      }
-    });
-    
-    if (isOpen) {
-      row.classList.remove('is-open');
-      detail.style.maxHeight = '0';
-    } else {
-      row.classList.add('is-open');
-      detail.style.maxHeight = detail.scrollHeight + 'px';
-    }
-  });
 });
 
 /* Quiet chime */
