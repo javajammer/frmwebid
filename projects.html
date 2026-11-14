@@ -1397,9 +1397,10 @@ h1, h2, h3, h4 {
     <span class="nav__brand-meta">Software Engineer</span>
   </a>
   <nav class="nav__links">
+    <a href="/" class="nav__link">About</a>
     <a href="#projects" class="nav__link">Projects</a>
     <a href="#maker" class="nav__link">Why I Build</a>
-    <a href="#contact" class="nav__link">Contact</a>
+    <a href="https://www.practicalsecurity.web.id" class="nav__link" rel="noopener noreferrer">Practical Security</a>
     <button class="nav__chime" id="chime-toggle" aria-label="Toggle quiet chime">
       <span class="nav__chime-dot"></span>
       <span class="nav__chime-label">Quiet chime</span>
@@ -1572,60 +1573,6 @@ h1, h2, h3, h4 {
   </div>
 </section>
 
-<!-- =========================  CONTACT  ========================= -->
-<section class="first-class" id="contact">
-  <div class="first-class__grid">
-    
-    <div class="first-class__left">
-      <div class="section__eyebrow fade-up">
-        <span class="section__eyebrow-line"></span>
-        <span class="eyebrow">Start a conversation</span>
-      </div>
-      
-      <h2 class="first-class__title fade-up">Have something you're trying to <em>figure out</em>?</h2>
-      
-      <p class="first-class__lede fade-up">This isn't a software shop. But if you're working on a small technical problem, an interesting idea, or something that doesn't quite fit into an existing tool, you're welcome to write. Maybe I've built something that helps. Maybe I can point you toward something that already exists. Maybe we'll discover that the problem is more interesting than the solution. Either way, I'm happy to have the conversation.</p>
-      
-      <ul class="first-class__notes fade-up">
-        <li>I read every message myself</li>
-    <li>No sales call - No newsletter - No follow-up sequence</li>
-    <li>No promise that I'll build your idea</li>
-        <li>If I can't help, I'll say so — and suggest who might</li>
-      </ul>
-    </div>
-    
-    <form class="first-class__form fade-up" id="booking-form">
-      <div class="form__row">
-        <label class="form__label" for="f-name">Your name</label>
-        <input class="form__input" type="text" id="f-name" name="name" required>
-      </div>
-      <div class="form__row">
-        <label class="form__label" for="f-email">Email</label>
-        <input class="form__input" type="email" id="f-email" name="email" required>
-      </div>
-      <div class="form__row">
-        <label class="form__label" for="f-window">What's this about</label>
-        <select class="form__select" id="f-window" name="window">
-          <option>Using BagiPDF or Novenaku</option>
-          <option>A problem I'd like your take on</option>
-          <option>Just want to talk shop</option>
-          <option>Something else — I'll explain below</option>
-        </select>
-      </div>
-      <div class="form__row">
-        <label class="form__label" for="f-why">Tell me about it</label>
-        <textarea class="form__textarea" id="f-why" name="why" rows="4" placeholder="One paragraph is plenty. The concise you write this, the more useful my reply will be."></textarea>
-      </div>
-      <button type="submit" class="form__submit">
-        <span>Send a quiet message</span>
-        <span class="form__submit-arrow">→</span>
-      </button>
-      <p class="form__note">You'll hear back personally when I can.</p>
-    </form>
-    
-  </div>
-</section>
-
 </main>
 
 <!-- =========================  FOOTER  ========================= -->
@@ -1634,26 +1581,24 @@ h1, h2, h3, h4 {
     <div class="footer__brand">
       <div class="footer__brand-name">frm.web.id</div>
       <div class="footer__brand-tag">Small software, security experiments, and things worth building. Made patiently, mostly for the fun of understanding how things work.</div>
+      <p class="footer__brand-tag" style="margin-top:0.75rem;font-size:0.85rem;">For professional security engagements, visit <a href="https://www.practicalsecurity.web.id" rel="noopener noreferrer">Practical Security</a>.</p>
     </div>
     <div class="footer__cols">
       <div class="footer__col">
         <span class="eyebrow">Site</span>
+        <a href="/">About</a>
         <a href="#projects">Projects</a>
-        <a href="#maker">Why I Build</a>
-        <a href="#contact">Contact</a>
+        <a href="https://www.practicalsecurity.web.id" rel="noopener noreferrer">Practical Security</a>
       </div>
       <div class="footer__col">
         <span class="eyebrow">Elsewhere</span>
         <a href="https://github.com/javajammer">GitHub</a>
         <a href="https://www.linkedin.com/in/riesal">LinkedIn</a>
-        <a href="#">Writing (rare)</a>
-      </div>
+              </div>
       <div class="footer__col">
         <span class="eyebrow">Contact</span>
         <a href="mailto:rizal@frm.web.id">rizal@frm.web.id</a>
-        <a href="https://wa.me/6281717179080">Whatsapp — on request</a>
-        <a href="#">PGP key</a>
-      </div>
+              </div>
     </div>
   </div>
   <div class="footer__bottom">
@@ -1841,21 +1786,6 @@ let chimeScrollHandler = () => {
   }
 };
 window.addEventListener('scroll', chimeScrollHandler, { passive: true });
-
-/* Form submit */
-const form = document.getElementById('booking-form');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const thanks = document.createElement('div');
-  thanks.className = 'form__thanks';
-  thanks.innerHTML = `
-    <div class="form__thanks-mark">—</div>
-    <div class="form__thanks-title">Your message is in.</div>
-    <div class="form__thanks-body">I read every form myself, usually within two business days. If you don't hear from me by then, something went wrong with the form — write to <em>rizal@frm.web.id</em> directly. In the meantime, breathe.</div>
-  `;
-  form.innerHTML = '';
-  form.appendChild(thanks);
-});
 
 /* Reduced motion guard */
 if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
