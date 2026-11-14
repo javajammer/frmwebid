@@ -11,7 +11,11 @@
 - Name: Muhammad Fahrizal Rahman
 - Also known as: Rizal, riesal
 - Location: Jakarta, Indonesia
-- Practice: cyber security, infrastructure, DevOps, AIOps, GNU/Linux
+- Role: VP Infrastructure & Security, PT Infokes Indonesia (Kawan Sehat group)
+- Scope: leads a 26-person organization and an infrastructure budget above USD 500k a year for a healthcare platform used by about 70% of Indonesia's puskesmas
+- Record: ISO/IEC 27001:2022 certification (2025) and first surveillance (2026), both with no minor findings; 300-server migration from on-premises and GCP to AWS in one month; Intel to ARM by December 2025; server cost down 25%; downtime down about 60%
+- Background: 20 years across hosting, e-commerce, travel, and healthcare, including Traveloka, Reebonz in Singapore, and PCI-DSS work at Orami/Sirclo
+- Source: https://www.linkedin.com/in/riesal/
 - Languages: Bahasa Indonesia, English
 - LinkedIn: https://www.linkedin.com/in/riesal/
 - GitHub: https://github.com/javajammer
