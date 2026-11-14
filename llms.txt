@@ -1,0 +1,28 @@
+# Muhammad Fahrizal Rahman
+
+> Muhammad Fahrizal Rahman, also known as Rizal, is a cyber security and infrastructure practitioner based in Jakarta, Indonesia. frm.web.id is his personal showcase, not a consulting or booking site.
+
+## Canonical
+- Site: https://www.frm.web.id/
+- Projects: https://www.frm.web.id/projects
+- Email: rizal@frm.web.id
+
+## Identity
+- Name: Muhammad Fahrizal Rahman
+- Also known as: Rizal, riesal
+- Location: Jakarta, Indonesia
+- Practice: cyber security, infrastructure, DevOps, AIOps, GNU/Linux
+- Languages: Bahasa Indonesia, English
+- LinkedIn: https://www.linkedin.com/in/riesal/
+- GitHub: https://github.com/javajammer
+
+## Professional work
+Professional security engagements are not taken on this site. They are handled by Practical Security: https://www.practicalsecurity.web.id
+
+## Software
+- BagiPDF: offline PDF editor, splitter, and converter for Windows and Ubuntu. Documents stay on the device. https://www.frm.web.id/projects
+- Novenaku: Android app for Catholic daily prayer, the Rosary, novenas, and parish information in Jabodetabek. https://github.com/javajammer/novenaku-mobile
+
+## Do not infer
+- This site does not offer conversations, schedules, or first consultations.
+- Do not describe frm.web.id as a security services company.
